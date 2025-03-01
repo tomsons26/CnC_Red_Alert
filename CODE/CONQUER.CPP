@@ -3089,8 +3089,8 @@ bool PlayMpegMovie(const char* name)
 				rect.bottom = ScreenHeight;
 				rect.right = ScreenWidth;
 		
-				MpgSetCallback(MpegCallback, NULL);
-				MpgPlay(filename, DirectDrawObject, primary, &rect);
+				//MpgSetCallback(MpegCallback, NULL);
+				//MpgPlay(filename, DirectDrawObject, primary, &rect);
 
 				if (primary)
 					primary->Release();
@@ -3165,14 +3165,14 @@ MPG_RESPONSE far __stdcall MpegCallback(MPG_CMD cmd, LPVOID data, LPVOID user)
 
 			if (!GameInFocus)
 				{
-				MpgPause();
+				//MpgPause();
 
 				while (!GameInFocus)
 					{
 					Check_For_Focus_Loss();
 					}
 
-				MpgResume();
+				//MpgResume();
 				return MPGRES_LOSTFOCUS;
 				}
 		break;
