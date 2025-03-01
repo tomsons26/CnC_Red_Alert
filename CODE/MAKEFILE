@@ -56,14 +56,15 @@ LANGUAGE=ENGLISH
 WWFLAT=..\win32lib
 WWOBJ=obj\win32\$(LANGUAGE)
 LINKFILE=win95.lnk
-CC=..\watcom\binnt\wpp386
-LIB=..\watcom\binnt\wlib
+CC=$(%WATCOM)\binnt\wpp386
+LIB=$(%WATCOM)\binnt\wlib
+AS=msdos tasm
 !else
 WWFLAT=..\wwflat32
 WWOBJ=obj\dos
 LINKFILE=conquer.lnk
-CC=..\watcom\binnt\wpp386
-LIB=..\watcom\binnt\wlib
+CC=$(%WATCOM)\binnt\wpp386
+LIB=$(%WATCOM)\binnt\wlib
 !endif
 
 #---------------------------------------------------------------------------
@@ -90,8 +91,8 @@ CC_CFG += /DWOLAPI_INTEGRATION
 CC_CFG += /DWINSOCK_IPX
 CC_CFG += /D$(LANGUAGE)=1
 CC_CFG += /i=..\dxsdk\inc
-CC_CFG += /i=..\watcom\h\nt                # NT include directory.
-CC_CFG += /i=..\watcom\H                   # Normal Watcom include directory.
+CC_CFG += /i=$(%WATCOM)\h\nt                # NT include directory.
+CC_CFG += /i=$(%WATCOM)\H                   # Normal Watcom include directory.
 CC_CFG += /i=$(WWFLAT)\INCLUDE          # Normal library include directory.
 CC_CFG += /i=..\winvq\include           # Includes player (VQ) directory.
 CC_CFG += /bt=NT
@@ -99,7 +100,7 @@ CC_CFG += /otxan
 CC_CFG += /5r                           # Pentium optimized register calling conventions.
 !else
 CC_CFG = /d1                            # Partial debug (line numbers only)
-CC_CFG += /i=..\watcom\H                   # Normal Watcom include directory.
+CC_CFG += /i=$(%WATCOM)\H                   # Normal Watcom include directory.
 CC_CFG += /i=$(WWFLAT)\INCLUDE          # Normal library include directory.
 CC_CFG += /i=..\vq\include              # Includes player (VQ) directory.
 CC_CFG += /DDOS4G                       # Must be defined for Greenleaf
@@ -149,7 +150,7 @@ ASM_CFG += /ml                          # Case sensitivity on code.
 
 .asm.obj:
 	echo Assembling $<
-	utils\tasm $(ASM_CFG) $<, $(WWOBJ)\$^.
+	$(AS) $(ASM_CFG) $<, $(WWOBJ)\$^.
 
 #---------------------------------------------------------------------------
 # Object modules.
@@ -230,7 +231,6 @@ OBJECTS = &
 	IPXCONN.OBJ &
 	IPXGCONN.OBJ &
 	IPXMGR.OBJ &
-	IPXPROT.OBJ &
 	JSHELL.OBJ &
 	LAYER.OBJ &
 	LINK.OBJ &
@@ -718,15 +718,15 @@ $(WWOBJ)\ipxreal.ibn: $(WWOBJ)\ipxreal.obj
 	%append $^*.rsp $(WWOBJ)\$^&.obj
 	%append $^*.rsp $(WWOBJ)\$^&.exe
 	%append $^*.rsp $(WWOBJ)\$^&.map
-	utils\tlink @$^*.rsp
-	utils\tdstrip $(WWOBJ)\ipxreal.exe
-	utils\ebn $(WWOBJ)\ipxreal.exe
+	msdos tlink @$^*.rsp
+	msdos tdstrip $(WWOBJ)\ipxreal.exe
+	msdos ebn $(WWOBJ)\ipxreal.exe
 
 $(WWOBJ)\ipxreal.obj:	ipxreal.asm
-	utils\tasm /zn /la /ml /m2 ipxreal.asm, $(WWOBJ)\ipxreal.obj
+	$(AS) /zn /la /ml /m2 ipxreal.asm, $(WWOBJ)\ipxreal.obj
 
 ipxprot.obj: $(WWOBJ)\ipxreal.ibn ipxprot.asm
-	utils\tasm $(ASM_CFG) ipxprot.asm, $(WWOBJ)\ipxprot.obj
+	$(AS) $(ASM_CFG) ipxprot.asm, $(WWOBJ)\ipxprot.obj
 #	copy $(WWOBJ)\ipxprot.obj d:obj /U
 
 

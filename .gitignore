@@ -1,0 +1,11 @@
+*.obj
+*.lib
+*.lnk
+*.bak
+*.rsp
+*.map
+*.exe
+*.ibn
+*.dll
+*.lst
+*.pch
