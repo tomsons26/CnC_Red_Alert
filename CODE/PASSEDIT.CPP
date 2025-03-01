@@ -29,7 +29,7 @@
 
 //#include "WolDebug.h"
 
-bool bTabKeyPressedHack = false;
+//bool bTabKeyPressedHack = false;
 
 //***********************************************************************************************
 void PassEditClass::Draw_Text( char const * text )
@@ -134,7 +134,7 @@ int PassEditClass::Action(unsigned flags, KeyNumType & key)
 				} else {
 					if( key == KN_TAB )
 					{
-						bTabKeyPressedHack = true;
+						//bTabKeyPressedHack = true;
 					}
 					flags &= ~KEYBOARD;
 					key = KN_NONE;

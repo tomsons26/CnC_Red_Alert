@@ -1,14 +1,18 @@
 Currently this may compile locally only for me, a lot needs to be figured out to get this to be
 consistently compileable
 
-Westwood used WLink from Watcom 11, placed in code\linker as wlink.dll and nwlink.exe,
+NEEDED:
+- http://takeda-toshiya.my.coocan.jp/msdos/ for invoking 16 bit TASM
+- UUID.LIB from Watcom 11
+- Westwood used WLink from Watcom 11, placed in code\linker as wlink.dll and nwlink.exe,
 this is cause 10.6 WLink crashes making debug symbols
+- Various missing h/cpp files can be found in Remasters repo
 
-Westwood used 16-bit tasm, thus this needs a old Windows VM to build or a msdos emulator such as MSDOS Player
+NOTES:
+- WMAKE copy directive is broken, replacing with -copy forces it to use system's
 
 
-TODO
-
+TODO:
 - solve ipxproto ebn dependency or eliminate ipxproto all togther
 - verify pcx.h
 - restore PassEditClass, currently its a renamed WOLEditClass
