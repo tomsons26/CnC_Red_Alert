@@ -1,0 +1,6 @@
+LIBRARY mpgdll
+EXPORTS
+MpgSetCallback@8=mpgdll._imp__MpgSetCallback@8
+MpgPause@0=mpgdll._imp__MpgPause@0
+MpgResume@0=mpgdll._imp__MpgResume@0
+MpgPlay@16=mpgdll._imp__MpgPlay@16

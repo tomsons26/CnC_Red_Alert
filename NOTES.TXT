@@ -10,6 +10,9 @@ this is cause 10.6 WLink crashes making debug symbols
 
 NOTES:
 - WMAKE copy directive is broken, replacing with -copy forces it to use system's
+- mpgdll.def needs to be build with MSVC using this command
+	"lib /LINK50COMPAT /def:mpgdll.def /OUT:mpgdll.lib /MACHINE:X86"
+	lib needs to be placed in code\
 
 
 TODO:
