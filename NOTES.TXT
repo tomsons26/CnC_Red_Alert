@@ -1,19 +1,20 @@
-Currently this may compile locally only for me, a lot needs to be figured out to get this to be
+Seems to compile but a lot needs to be figured out to get this to be
 consistently compileable
+edit my_make.bat in root dir with your paths
 
 NEEDED:
-- http://takeda-toshiya.my.coocan.jp/msdos/ for invoking 16 bit TASM
-- UUID.LIB from Watcom 11
+- Watcom 10.6
 - Westwood used WLink from Watcom 11, placed in code\linker as wlink.dll and nwlink.exe,
 this is cause 10.6 WLink crashes making debug symbols
-- Various missing h/cpp files can be found in Remasters repo
+- http://takeda-toshiya.my.coocan.jp/msdos/ for invoking 16 bit TASM
+- UUID.LIB from Watcom 11
+- TASM32 from 4.1 to run on modern Windows, if that doesn't work try even newer, TASM (16 bit must remain 4.0)
 
 NOTES:
-- WMAKE copy directive is broken, replacing with -copy forces it to use system's
-- mpgdll.def needs to be build with MSVC using this command
-	"lib /LINK50COMPAT /def:mpgdll.def /OUT:mpgdll.lib /MACHINE:X86"
-	lib needs to be placed in code\
-
+- WMAKE copy directive is broken, replaced with -copy forces it to use system's
+- Various missing h/cpp files can be found in Remasters repo
+- high res vqa is broken currently cause vqa lib code is outdated,
+	its likely they kept only a lib up to date, not whole source dir
 
 TODO:
 - solve ipxproto ebn dependency or eliminate ipxproto all togther
@@ -21,4 +22,9 @@ TODO:
 - restore PassEditClass, currently its a renamed WOLEditClass
 - verify palette.h/cpp taken from remasters
 - make a def and lib file out of mpegdll.dll in 3.03 patch
-- todo stub Greenleaf
+- find mpgdll solution, the import library needs to export _FunctionName and __imp__FunctionName,
+	but declaring in def  _FunctionName makes __imp___FunctionName
+	- TODO doesnt work ---- mpgdll.def needs to be build with MSVC using this command
+		"lib /LINK50COMPAT /def:mpgdll.def /OUT:mpgdll.lib /MACHINE:X86"
+		lib needs to be placed in code\
+- investigate getting TASM32 4.0 working
